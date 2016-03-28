@@ -1,5 +1,5 @@
 -- TODO: replace path with large data set path
-bigrams = LOAD 's3://cse6242-mmay30/testdata/*' AS (bigram:chararray, year:int, count:double, books:double);
+bigrams = LOAD '$INPUT' AS (bigram:chararray, year:int, count:double, books:double);
 
 -- Group the data by bigram.
 grouped = GROUP bigrams BY bigram;
@@ -14,4 +14,4 @@ ordered = ORDER averaged BY avg DESC, group ASC;
 top_ten = LIMIT ordered 10;
 
 -- Store results on S3.
-STORE top_ten INTO 's3://cse6242-mmay30/run1';
+STORE top_ten INTO '$OUTPUT/run1';
