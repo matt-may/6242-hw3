@@ -50,10 +50,9 @@ object Task2 {
     // mkString). The result doesn’t need to be sorted.
 
     // Prepare for writing.
-    val counts = reduced.map { case (key, value) => Array(key.toInt, value).mkString("\t") }
+    val counts = reduced.map { case (key, value) => s"$key\t$value"}
 
     // store output on given HDFS path.
-    // YOU NEED TO CHANGE THIS
     counts.saveAsTextFile("hdfs://localhost:8020" + args(1))
   }
 }
