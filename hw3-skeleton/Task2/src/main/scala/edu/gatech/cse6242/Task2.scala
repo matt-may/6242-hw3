@@ -4,15 +4,6 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 
-object MyFunctions {
-  def addInt( a:Int, b:Int, c:Int ) : Int = {
-      var sum:Int = 0
-      sum = a + b
-
-      return sum
-   }
-}
-
 object Task2 {
   def main(args: Array[String]) {
     val sc = new SparkContext(new SparkConf().setAppName("Task2"))
