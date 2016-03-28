@@ -1,0 +1,15 @@
+19: The input file on the Hadoop filesystem is the first command line
+    argument. A text file RDD is created (collection of lines).
+22: Each line of the file is split by tab, and then mapped to convert the
+    strings into integers.
+25: The output from [22] is filtered to only include edges with edge weights
+    other than 1.
+28, 31: The output from [25] is mapped to (k,v) pairs. For source nodes, the
+    pattern is (src, 0.8*weight). For target nodes, the pattern is
+    (tgt, 0.2*weight).
+34: The output from [28] and [31] is combined by key (node).
+37: The computed node weights for each node are summed.
+44: Each (k,v) pair from [37] is mapped to a string of the form
+    “<node>\t<summed_weights>”.
+47: Each string from [44] is written to a new line in the output file (second
+    command line argument).
