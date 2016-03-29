@@ -1,15 +1,9 @@
-
 # coding: utf-8
-
-# In[149]:
 
 import pandas as pd
 import seaborn as sns
 import numpy as np
 from StringIO import StringIO
-
-
-# In[150]:
 
 # Helper function for writing pandas data to a file
 def write_to_file(data, f):
@@ -18,15 +12,12 @@ def write_to_file(data, f):
     f.write(output.getvalue())
     output.close()
 
-
-# In[151]:
-
 ##########
 # 4.a
 ##########
 
-# Instructions: 
-# Using pandas, load the data as dataframes and find the number 
+# Instructions:
+# Using pandas, load the data as dataframes and find the number
 # of unique movies and number of unique users in the dataset.
 
 # Open the output file.
@@ -59,15 +50,12 @@ f.write(str(unique_movies) + "\n")
 unique_users = len(pd.unique(data['user id']))
 f.write(str(unique_users) + "\n")
 
-
-# In[152]:
-
 ##########
 # 4.b
 ##########
 
-# Instructions: 
-# Using pandas, find the top 5 movies with the most number of 
+# Instructions:
+# Using pandas, find the top 5 movies with the most number of
 # ratings. Sort the output from most ratings to least ratings.
 
 f.write("---4.b---\n")
@@ -82,16 +70,13 @@ top_5_by_rating = combined['movie title'].value_counts()[:5]
 # Write.
 write_to_file(top_5_by_rating, f)
 
-
-# In[153]:
-
 ##########
 # 4.c
 ##########
 
 # Instructions:
 # Find the top 5 movies with the lowest average age of the
-# people that rated the movies. Consider only the movies that 
+# people that rated the movies. Consider only the movies that
 # have got at least 100 ratings.
 
 f.write("---4.c---\n")
@@ -108,16 +93,13 @@ sorted_by_age = with_100_or_more.sort_values(('age', 'mean'), ascending=True).he
 # Write.
 write_to_file(sorted_by_age, f)
 
-
-# In[154]:
-
 ##########
 # 4.d
 ##########
 
 # Instructions:
-# Draw a scatterplot with marginal histograms to visualize 
-# how the average rating varies with age. Save this plot as 
+# Draw a scatterplot with marginal histograms to visualize
+# how the average rating varies with age. Save this plot as
 # scatterhist.png.
 
 import matplotlib.pyplot as plt
@@ -125,17 +107,14 @@ import matplotlib.pyplot as plt
 f.write("---4.d---\n")
 
 # Group by age, and determine the mean rating.
-grouped_by_age = combined.groupby('age').agg({'rating': np.mean}) 
+grouped_by_age = combined.groupby('age').agg({'rating': np.mean})
 
 # Make the age index a column.
-grouped_by_age.reset_index(inplace=True) 
+grouped_by_age.reset_index(inplace=True)
 
 # Determine average rating by page
 sns.jointplot(x='age', y='rating', data=grouped_by_age, color='#968fad')
 sns.plt.show()
-
-
-# In[155]:
 
 ##########
 # 4.e
@@ -143,9 +122,9 @@ sns.plt.show()
 
 # Instructions:
 # Augment the scatterplot with density estimates.
-# Please note that you will be awarded points for 
+# Please note that you will be awarded points for
 # this section only if the graph has both the density
-# estimates and the scatterplot on the same graph. 
+# estimates and the scatterplot on the same graph.
 # Save this plot as scatterbonus.png.
 
 f.write("---4.e---\n")
@@ -154,13 +133,5 @@ f.write("---4.e---\n")
 sns.jointplot(x='age', y='rating', data=grouped_by_age, color='#968fad', kind='kde').plot_joint(plt.scatter)
 sns.plt.show()
 
-
-# In[156]:
-
+# Close the file.
 f.close()
-
-
-# In[ ]:
-
-
-
